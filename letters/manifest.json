@@ -1,7 +1,7 @@
 {
   "name": "Letters",
   "short_name": "Letters",
-  "start_url": "/index.html",
+  "start_url": "/live/letters/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff"
