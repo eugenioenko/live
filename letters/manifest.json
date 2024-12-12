@@ -1,0 +1,8 @@
+{
+  "name": "Letters",
+  "short_name": "Letters",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff"
+}
