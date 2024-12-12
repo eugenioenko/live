@@ -15,7 +15,7 @@ const neonColors = [
 ];
 
 const two = new Two({
-  type: Two.Types.svg,
+  type: Two.Types.canvas,
   fullscreen: true,
   autostart: true,
 }).appendTo(document.body);
