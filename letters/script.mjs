@@ -21,48 +21,63 @@ const two = new Two({
 }).appendTo(document.body);
 
 two.renderer.domElement.style.background = "#000";
-const characters = [];
 
+const gravity = new Two.Vector(0, 0.1);
 const styles = {
   family: "proxima-nova, sans-serif",
-  size: 72,
+  size: 48,
   leading: 50,
   weight: 900,
 };
+const maxUntilFall = 7;
+let current;
+let characters = [];
+let isFalling = false;
 
-// Add events to the page
-window.addEventListener(
-  "keydown",
-  (e) => {
-    add(String.fromCharCode(e.which).toUpperCase());
-  },
-  false
-);
+window.addEventListener("touchstart", (e) => {
+  const touches = e.touches?.[0] ||
+    e.changedTouches?.[0] || { clientX: 0, clientY: 0 };
 
-window.addEventListener(
-  "click",
-  () => {
-    add(getRandomCapitalLetter());
-  },
-  false
-);
+  const letter = getRandomCapitalLetter();
+  playLetterSound(letter);
+  add(letter, touches.clientX, touches.clientY);
+});
+
+window.addEventListener("touchmove", (e) => {
+  if (!current) {
+    return;
+  }
+  const touches = e.touches?.[0] ||
+    e.changedTouches?.[0] || { clientX: 0, clientY: 0 };
+
+  current.translation.x = touches.clientX;
+  current.translation.y = touches.clientY;
+});
+
+window.addEventListener("touchend", () => {
+  current = undefined;
+});
 
 two.bind("update", update);
 
-const gravity = new Two.Vector(0, 0.1);
 function update() {
+  if (!isFalling) {
+    return;
+  }
   for (let i = 0; i < characters.length; i++) {
     const text = characters[i];
 
     text.translation.addSelf(text.velocity);
-    text.rotation += text.velocity.r;
     text.velocity.add(gravity);
 
     // remove text when velocity is 0 or outside screen
-    if (text.velocity.y > 0 && text.translation.y > two.height) {
+    if (text.translation.y > two.height) {
       two.scene.remove(text);
       two.release(text);
-      characters.splice(i, 1);
+      characters = characters.filter((char) => char !== text);
+      if (!characters.length) {
+        isFalling = false;
+      }
     }
   }
 }
@@ -77,18 +92,28 @@ function getRandomNeonColor() {
   return neonColors[randomIndex];
 }
 
-function add(msg) {
-  const x = (Math.random() * two.width) / 2 + two.width / 4;
-  const y = two.height * 1.25;
-
+function add(msg, x, y) {
   const text = two.makeText(msg, x, y, styles);
   text.size *= 4;
   text.fill = getRandomNeonColor();
-
-  text.velocity = new Two.Vector();
-  text.velocity.x = 4 * Math.random() - 2;
-  text.velocity.y = -10 - 5 * Math.random();
-  text.velocity.r = 0;
-
+  text.velocity = new Two.Vector(0, 0);
+  current = text;
   characters.push(text);
+  if (characters.length > maxUntilFall) {
+    isFalling = true;
+  }
+}
+
+function playLetterSound(letter) {
+  // Find the preloaded audio element by ID
+  const audio = document.getElementById(letter);
+  if (!audio) {
+    console.error(`Audio element for letter "${letter}" not found.`);
+    return;
+  }
+
+  // Play the audio
+  audio.play().catch((error) => {
+    console.error(`Error playing sound for letter "${letter}":`, error);
+  });
 }
