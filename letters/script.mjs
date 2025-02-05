@@ -33,6 +33,7 @@ const maxUntilFall = 7;
 let current;
 let characters = [];
 let isFalling = false;
+let typewriter = 100;
 
 window.addEventListener("touchstart", (e) => {
   const touches = e.touches?.[0] ||
@@ -56,6 +57,20 @@ window.addEventListener("touchmove", (e) => {
 
 window.addEventListener("touchend", () => {
   current = undefined;
+  if (characters.length > maxUntilFall) {
+    isFalling = true;
+  }
+});
+
+window.addEventListener("keypress", (e) => {
+  const letter = e.key.toLocaleUpperCase();
+  playLetterSound(letter);
+  add(letter, typewriter, two.height / 3);
+  typewriter += 130;
+  if (typewriter > two.width) {
+    typewriter = 100;
+    isFalling = true;
+  }
 });
 
 two.bind("update", update);
@@ -94,21 +109,17 @@ function getRandomNeonColor() {
 
 function add(msg, x, y) {
   const text = two.makeText(msg, x, y, styles);
-  text.size *= 4;
+  text.size *= 3;
   text.fill = getRandomNeonColor();
   text.velocity = new Two.Vector(0, 0);
   current = text;
   characters.push(text);
-  if (characters.length > maxUntilFall) {
-    isFalling = true;
-  }
 }
 
 function playLetterSound(letter) {
   // Find the preloaded audio element by ID
   const audio = document.getElementById(letter);
   if (!audio) {
-    console.error(`Audio element for letter "${letter}" not found.`);
     return;
   }
 
