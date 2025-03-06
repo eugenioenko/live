@@ -35,6 +35,15 @@ let characters = [];
 let isFalling = false;
 let typewriter = 100;
 
+window.addEventListener("click", (e) => {
+  const letter = getRandomCapitalLetter();
+  playLetterSound(letter);
+  add(letter, e.clientX, e.clientY);
+  if (characters.length > maxUntilFall * 2) {
+    isFalling = true;
+  }
+});
+
 window.addEventListener("touchstart", (e) => {
   const touches = e.touches?.[0] ||
     e.changedTouches?.[0] || { clientX: 0, clientY: 0 };
@@ -43,6 +52,7 @@ window.addEventListener("touchstart", (e) => {
   playLetterSound(letter);
   add(letter, touches.clientX, touches.clientY);
 });
+
 
 window.addEventListener("touchmove", (e) => {
   if (!current) {
