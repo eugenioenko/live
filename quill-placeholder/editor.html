@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editor</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/quill-placeholder-module@0.3.1/dist/placeholder-module.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left-column">
+        <div class="wrapper">
+          <div id="toolbar-container">
+            <span class="ql-formats">
+              <select class="ql-font"></select>
+              <select class="ql-size"></select>
+            </span>
+            <span class="ql-formats">
+              <button class="ql-bold"></button>
+              <button class="ql-italic"></button>
+              <button class="ql-underline"></button>
+              <button class="ql-strike"></button>
+            </span>
+            <span class="ql-formats">
+              <select class="ql-color"></select>
+              <select class="ql-background"></select>
+            </span>
+            <span class="ql-formats">
+              <button class="ql-list" value="ordered"></button>
+              <button class="ql-list" value="bullet"></button>
+              <button class="ql-indent" value="-1"></button>
+              <button class="ql-indent" value="+1"></button>
+            </span>
+            <span class="ql-formats">
+              <button class="ql-direction" value="rtl"></button>
+              <select class="ql-align"></select>
+            </span>
+            <span class="ql-formats">
+              <button class="ql-link"></button>
+            </span>
+            <span class="ql-formats">
+              <button class="ql-clean"></button>
+            </span>
+          </div>
+          <div id="editor">
+            <h1>Mock Document</h1>
+            <p><br /></p>
+            <h2>Praeambulum</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Vestibulum fermentum justo quis massa
+            </p>
+            <p>
+              convallis, eu tincidunt urna suscipit. Curabitur auctor ligula non
+              dolor hendrerit, a dignissim erat
+            </p>
+            <p>
+              tempus. Integer aliquet, sapien eu faucibus pretium, lacus metus
+              vestibulum mi, nec varius purus
+            </p>
+            <p>
+              dui at sapien. Phasellus tristique risus nec urna facilisis, ac
+              egestas metus accumsan.
+            </p>
+            <p><br /></p>
+            <h2>Caput II: Nexus et Divergentia</h2>
+            <p>
+              Sed lacinia, nibh quis vulputate scelerisque, urna dui volutpat
+              sem, vitae lacinia lacus nisi sit
+            </p>
+            <p>
+              amet orci. Nunc vel vehicula leo. Aenean sed tortor quis nibh
+              mattis sollicitudin. Maecenas
+            </p>
+            <p>
+              ultricies dolor vitae magna consequat, vitae aliquet nisl luctus.
+              Proin vitae augue vitae purus
+            </p>
+            <p>convallis aliquet.</p>
+            <h2><br /></h2>
+            <h2>Enumeratio Elementorum</h2>
+            <ol>
+              <li data-list="ordered">
+                <span class="ql-ui" contenteditable="false"></span>Elementum
+                Alpha: Quodlibet sanguis inter stellas errat.
+              </li>
+              <li data-list="ordered">
+                <span class="ql-ui" contenteditable="false"></span>Elementum
+                Beta: In obscuro lumen perpetuum resonat.
+              </li>
+              <li data-list="ordered">
+                <span class="ql-ui" contenteditable="false"></span>Elementum
+                Gamma: Mysterium levitatis sub aqua latet.
+              </li>
+              <li data-list="ordered">
+                <span class="ql-ui" contenteditable="false"></span>Elementum
+                Delta: Arcus plurimi secundorum orbis.
+              </li>
+              <li data-list="ordered">
+                <span class="ql-ui" contenteditable="false"></span>Elementum
+                Epsilon: Imaginatio florens sine fine.
+              </li>
+            </ol>
+            <p><br /></p>
+            <p><br /></p>
+            <h2>Caput III: Commentarii Allegorici</h2>
+            <p><br /></p>
+            <p>
+              Praesent ultricies, mi vitae egestas consequat, arcu justo
+              efficitur odio, vitae aliquet nisl lectus
+            </p>
+            <p>
+              non nisl. Cras vulputate ligula sit amet tortor convallis, sed
+              luctus sapien ultricies. Fusce vehicula
+            </p>
+            <p>
+              sem nec ligula porttitor, quis sodales purus ullamcorper. Aenean
+              convallis orci sed ex hendrerit,
+            </p>
+            <p>at blandit odio facilisis.</p>
+          </div>
+        </div>
+      </div>
+      <div class="right-column">
+        <h3>Placeholders</h3>
+        <ul class="placeholders">
+          <li data-id="date" data-label="Date">Date</li>
+          <li data-id="invoice.number" data-label="Invoice Number">Invoice Number</li>
+          <li data-id="customer.name" data-label="Customer Name">Customer Name</li>
+          <li data-id="billing.address" data-label="Billing Address">Billing Address</li>
+          <li data-id="totalAmount" data-label="Total Amount">Total Amount</li>
+        </ul>
+        <h3>Operations</h3>
+        <button id="export-html">Export HTML</button>
+        <textarea id="output"></textarea>
+      </div>
+    </div>
+    <script src="./editor.js"></script>
+  </body>
+</html>
