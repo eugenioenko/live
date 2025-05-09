@@ -5,20 +5,10 @@ const quill = new Quill("#editor", {
     syntax: true,
     toolbar: "#toolbar-container",
     placeholder: {
-      delimiters: ['{{', '}}'],  // default
-      placeholders: [
-        { id: "foo", label: "Foo" },
-        { id: "required", label: "Required", required: true },
-        { id: "date", label: "Date" },
-        { id: "invoice-number", label: "Invoice Number" },
-        { id: "customer-name", label: "Customer Name" },
-        { id: "billing-address", label: "Billing Address" },
-        { id: "total-amount", label: "Total Amount" },
-      ],
+      delimiters: ['{{', '}}']
     },
   },
-  theme: "snow",
-  placeholder: "Compose an epic...",
+  theme: "snow"
 });
 
 document.querySelectorAll('.placeholders li').forEach(item => {
@@ -33,11 +23,15 @@ document.querySelectorAll('.placeholders li').forEach(item => {
 document.getElementById('export-html').addEventListener('click', () => {
   let html = quill.root.innerHTML;
 
-  // Replace placeholder spans with {{data-id}}
-  html = html.replace(/<span class="ql-placeholder-content"[^>]*data-id="([^"]+)"[^>]*>.*?<\/span>/g, (match, dataId) => {
-    return `{{${dataId}}}`;
-  });
+  // blackmagic to replace the placeholder label with placeholder id 
+  // <span data-id="user.address">{{User Address}}</span> becomes <span data-id="user.address">{{user.address}}</span>
+  html = html.replace(
+    /<span class="ql-placeholder-content"[^>]*data-id="([^"]+)"[^>]*>.*?<span[^>]*>{{.*?}}<\/span>.*?<\/span>/g,
+    (match, dataId) => {
+      return match.replace(/{{.*?}}/, `{{${dataId}}}`);
+    }
+  ).replace(/\uFEFF/g, '');
 
-  // Set the HTML to the textarea with id "output"
+  // TODO: this html needs to be wrapped  around and add print styles
   document.getElementById('output').value = html;
 });
