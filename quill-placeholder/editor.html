@@ -19,8 +19,9 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
     />
-    <script src="https://cdn.jsdelivr.net/npm/quill-placeholder-module@0.3.1/dist/placeholder-module.min.js"></script>
-    <link rel="stylesheet" href="./styles.css?v2" />
+    <script src="https://cdn.jsdelivr.net/npm/quill-placeholder-module@0.3.1/dist/placeholder-module.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quill-placeholder-autocomplete-module/dist/quill-placeholder-autocomplete-module.min.js"></script>
+    <link rel="stylesheet" href="./styles.css?v3" />
   </head>
   <body>
     <div class="container">
@@ -59,91 +60,47 @@
             </span>
           </div>
           <div id="editor">
-            <h1>Mock Document</h1>
-            <p><br /></p>
-            <h2>Praeambulum</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Vestibulum fermentum justo quis massa
-            </p>
-            <p>
-              convallis, eu tincidunt urna suscipit. Curabitur auctor ligula non
-              dolor hendrerit, a dignissim erat
-            </p>
-            <p>
-              tempus. Integer aliquet, sapien eu faucibus pretium, lacus metus
-              vestibulum mi, nec varius purus
-            </p>
-            <p>
-              dui at sapien. Phasellus tristique risus nec urna facilisis, ac
-              egestas metus accumsan.
-            </p>
-            <p><br /></p>
-            <h2>Caput II: Nexus et Divergentia</h2>
-            <p>
-              Sed lacinia, nibh quis vulputate scelerisque, urna dui volutpat
-              sem, vitae lacinia lacus nisi sit
-            </p>
-            <p>
-              amet orci. Nunc vel vehicula leo. Aenean sed tortor quis nibh
-              mattis sollicitudin. Maecenas
-            </p>
-            <p>
-              ultricies dolor vitae magna consequat, vitae aliquet nisl luctus.
-              Proin vitae augue vitae purus
-            </p>
-            <p>convallis aliquet.</p>
-            <h2><br /></h2>
-            <h2>Enumeratio Elementorum</h2>
-            <ol>
-              <li data-list="ordered">
-                <span class="ql-ui" contenteditable="false"></span>Elementum
-                Alpha: Quodlibet sanguis inter stellas errat.
-              </li>
-              <li data-list="ordered">
-                <span class="ql-ui" contenteditable="false"></span>Elementum
-                Beta: In obscuro lumen perpetuum resonat.
-              </li>
-              <li data-list="ordered">
-                <span class="ql-ui" contenteditable="false"></span>Elementum
-                Gamma: Mysterium levitatis sub aqua latet.
-              </li>
-              <li data-list="ordered">
-                <span class="ql-ui" contenteditable="false"></span>Elementum
-                Delta: Arcus plurimi secundorum orbis.
-              </li>
-              <li data-list="ordered">
-                <span class="ql-ui" contenteditable="false"></span>Elementum
-                Epsilon: Imaginatio florens sine fine.
-              </li>
-            </ol>
-            <p><br /></p>
-            <p><br /></p>
-            <h2>Caput III: Commentarii Allegorici</h2>
+            <h1>Today's Weather Overview</h1>
             <p><br /></p>
             <p>
-              Praesent ultricies, mi vitae egestas consequat, arcu justo
-              efficitur odio, vitae aliquet nisl lectus
+              The weather today is mostly mild with some variations depending on
+              your region. Here's a quick summary of the key conditions:
             </p>
-            <p>
-              non nisl. Cras vulputate ligula sit amet tortor convallis, sed
-              luctus sapien ultricies. Fusce vehicula
-            </p>
-            <p>
-              sem nec ligula porttitor, quis sodales purus ullamcorper. Aenean
-              convallis orci sed ex hendrerit,
-            </p>
-            <p>at blandit odio facilisis.</p>
+            <p><br /></p>
+            <ul>
+              <li>
+                🌤 Partly Cloudy: Expect a mix of sun and clouds throughout the
+                day.
+              </li>
+              <li>
+                🌡 Temperatures: Daytime highs around 72°F (22°C) and lows near
+                55°F (13°C).
+              </li>
+              <li>
+                💨 Winds: Light breeze from the northwest at 5–10 mph (8–16
+                km/h).
+              </li>
+              <li>
+                🌧 Chance of Rain: Low (10%), but a few isolated sprinkles are
+                possible in the late afternoon.
+              </li>
+              <li>🌅 Sunset: Expected at 8:03 PM local time.</li>
+            </ul>
           </div>
         </div>
       </div>
       <div class="right-column">
-        <h3>Placeholders</h3>
         <ul class="placeholders">
           <li data-id="date" data-label="Date">Date</li>
-          <li data-id="invoice.number" data-label="Invoice Number">Invoice Number</li>
-          <li data-id="customer.name" data-label="Customer Name">Customer Name</li>
-          <li data-id="billing.address" data-label="Billing Address">Billing Address</li>
+          <li data-id="invoice.number" data-label="Invoice Number">
+            Invoice Number
+          </li>
+          <li data-id="customer.name" data-label="Customer Name">
+            Customer Name
+          </li>
+          <li data-id="billing.address" data-label="Billing Address">
+            Billing Address
+          </li>
           <li data-id="totalAmount" data-label="Total Amount">Total Amount</li>
         </ul>
         <h3>Operations</h3>
@@ -151,6 +108,6 @@
         <textarea id="output"></textarea>
       </div>
     </div>
-    <script src="./editor.js?v2"></script>
+    <script src="./editor.js?v3"></script>
   </body>
 </html>
